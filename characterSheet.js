@@ -220,9 +220,9 @@ $('#addWeaponForm').submit(function (event) {
   var weaponType = ''
 
   if ($('#weaponType').val() == 'fire') {
-    weaponType = 'Conhecimento'
+    weaponType = 'Fisico e Sangue'
   } else if ($('#weaponType').val() == 'fight') {
-    weaponType = 'Fisico e Conheciemento'
+    weaponType = 'Fisico e Elemental'
   }else if ($('#weaponType').val() == 'Ritual') {
     weaponType = 'Ritual'
   }
@@ -420,7 +420,7 @@ function addWeaponToTable(weapon, id) {
     
           $('.modalDice').css('transform', 'rotate(0deg)')
           $('.modalDice').css('-webkit-transform', 'rotate(0deg)')
-        }, 20000)
+        }, 100000000000))
       }, 2000)
     }
     
@@ -452,7 +452,7 @@ function addAttribute(attribute, id) {
       <img class="attributeDice" src="./img/dado.png" alt="Dado">
     </a>
     <h3>${attribute.type}</h3>
-    <input type="text" name="appearance" value="${attribute.amount}"  id="attribute_input_${id}" >
+    <input type="text" name="appearance" value="${attribute.amount}"  id="attribute_input_${id}" disabled>
   </div>
   
 <script>
@@ -531,7 +531,7 @@ function addAttribute(attribute, id) {
   
         $('.modalDice').css('transform', 'rotate(0deg)')
         $('.modalDice').css('-webkit-transform', 'rotate(0deg)')
-      }, 20000)
+      }, 100000000000)
     }, 2000)
   
 
@@ -625,16 +625,19 @@ function deleteWeapon(id) {
 
 //para vida
 
-
 function tirar(){
   
   let current = Number($('#lifeCurrent').val()) - 1
   const max = Number($('#lifeMax').val())
-
+  
   
   data.life.current = current
   data.life.max = max
 
+  const zero = 0
+  if (current < zero) {
+    current.add(++zero)
+  }
 
 
   $('.lifeBar').css('width', `${calculateBar(data.life.current, data.life.max)}%`)
@@ -654,7 +657,9 @@ function add(){
   data.life.current = current
   data.life.max = max
 
-
+if (current > max) {
+    current.add(--max)
+  }
 
   $('.lifeBar').css('width', `${calculateBar(data.life.current, data.life.max)}%`)
   
@@ -756,9 +761,5 @@ function addo(){
 function somadadef(valor){
 
 alert(valor)
-
-
-
-
 
 }
